@@ -1,6 +1,12 @@
 package com.uniovi.notaneitor.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Professor {
+
+    @Id
     private Long dni;
     private String nombre;
     private String apellidos;
