@@ -1,13 +1,13 @@
 package com.uniovi.notaneitor.entities;
 
 public class Professor {
-    private String dni;
+    private Long dni;
     private String nombre;
     private String apellidos;
     private String categoria;
     public Professor() {}
 
-    public Professor(String dni, String nombre, String apellidos, String categoria) {
+    public Professor(Long dni, String nombre, String apellidos, String categoria) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -23,7 +23,7 @@ public class Professor {
                 "categoria=" + categoria + "}";
     }
 
-    public String getDni() {
+    public Long getDni() {
         return dni;
     }
 
@@ -39,7 +39,7 @@ public class Professor {
         return categoria;
     }
 
-    public void setDni(String dni) {
+    public void setDni(Long dni) {
         this.dni = dni;
     }
 
