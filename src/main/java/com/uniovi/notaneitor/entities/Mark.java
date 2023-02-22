@@ -24,7 +24,7 @@ public class Mark {
     }
 
     public Mark(String description, Double score, User user) {
-        this.id = id;
+        super();
         this.description = description;
         this.score = score;
         this.user = user;

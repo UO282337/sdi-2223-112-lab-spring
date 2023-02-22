@@ -17,7 +17,6 @@ public class MarksController {
     @Autowired
     private UsersService usersService;
 
-
     @RequestMapping("/mark/list")
     public String getList(Model model) {
         model.addAttribute("markList", marksService.getMarks());
