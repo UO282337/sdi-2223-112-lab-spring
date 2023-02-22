@@ -32,7 +32,11 @@ public class UserValidator implements Validator{
         if (usersService.getUserByDni(user.getDni()) != null) {
             errors.rejectValue("dni", "Error.user.dniDuplicate");
         }
-
+        if (user.getPassword().length() < 5 || user.getPassword().length() > 24) {
+            errors.rejectValue("password", "Error.signup.password.length");}
+        if (!user.getPasswordConfirm().equals(user.getPassword())) {
+            errors.rejectValue("passwordConfirm",
+                    "Error.signup.passwordConfirm.coincidence");}
     }
 
 }
