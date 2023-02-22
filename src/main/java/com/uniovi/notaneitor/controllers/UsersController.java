@@ -21,7 +21,6 @@ public class UsersController {
     private SecurityService securityService;
     @Autowired
     private SignUpFormValidator signUpFormValidator;
-
     @Autowired
     private UserValidator userValidator;
     @RequestMapping("/user/list")
@@ -61,7 +60,11 @@ public class UsersController {
         return "user/edit";
     }
     @RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
-    public String setEdit(@PathVariable Long id, @ModelAttribute User user) {
+    public String setEdit(@Validated User user, @PathVariable Long id, BindingResult result){
+        userValidator.validate(user,result);
+        if(result.hasErrors()) {
+            return "user/edit";
+        }
         User userOriginal = usersService.getUser(id);
         userOriginal.setDni(user.getDni());
         userOriginal.setName(user.getName());
