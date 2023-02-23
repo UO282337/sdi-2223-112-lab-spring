@@ -1,7 +1,6 @@
 package com.uniovi.notaneitor.controllers;
 import com.uniovi.notaneitor.services.RolesService;
 import com.uniovi.notaneitor.services.SecurityService;
-import com.uniovi.notaneitor.validators.UserValidator;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +22,6 @@ public class UsersController {
     @Autowired
     private SignUpFormValidator signUpFormValidator;
     @Autowired
-    private UserValidator userValidator;
-
-    @Autowired
     private RolesService rolesService;
 
     @RequestMapping("/user/list")
@@ -36,16 +32,11 @@ public class UsersController {
     @RequestMapping(value = "/user/add")
     public String getUser(Model model) {
         model.addAttribute("usersList", usersService.getUsers());
-        model.addAttribute("user", new User());
         model.addAttribute("rolesList", rolesService.getRoles());
         return "user/add";
     }
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    public String setUser(@Validated User user, BindingResult result) {
-        userValidator.validate(user, result);
-        if(result.hasErrors()) {
-            return "/user/add";
-        }
+    public String setUser(@Validated User user) {
         usersService.addUser(user);
         return "redirect:/user/list";
     }
@@ -66,11 +57,7 @@ public class UsersController {
         return "user/edit";
     }
     @RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
-    public String setEdit(@Validated User user, @PathVariable Long id, BindingResult result){
-        userValidator.validate(user,result);
-        if(result.hasErrors()) {
-            return "user/edit";
-        }
+    public String setEdit(@ModelAttribute User user, @PathVariable Long id) {
         User userOriginal = usersService.getUser(id);
         userOriginal.setDni(user.getDni());
         userOriginal.setName(user.getName());

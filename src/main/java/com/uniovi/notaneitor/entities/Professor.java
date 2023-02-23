@@ -1,19 +1,23 @@
 package com.uniovi.notaneitor.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Professor {
-
     @Id
-    private Long dni;
+    @GeneratedValue
+    private Long id;
+    @Column(unique = true)
+    private String dni;
     private String nombre;
     private String apellidos;
     private String categoria;
     public Professor() {}
 
-    public Professor(Long dni, String nombre, String apellidos, String categoria) {
+    public Professor(String dni, String nombre, String apellidos, String categoria) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -29,7 +33,7 @@ public class Professor {
                 "categoria=" + categoria + "}";
     }
 
-    public Long getDni() {
+    public String getDni() {
         return dni;
     }
 
@@ -45,7 +49,7 @@ public class Professor {
         return categoria;
     }
 
-    public void setDni(Long dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -59,5 +63,8 @@ public class Professor {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+    public Long getId() {
+        return id;
     }
 }

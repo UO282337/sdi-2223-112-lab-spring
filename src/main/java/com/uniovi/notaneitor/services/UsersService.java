@@ -29,14 +29,16 @@ public class UsersService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
     }
-    public void updateUser(User user) {
-        usersRepository.save(user);
-    }
     public User getUserByDni(String dni) {
         return usersRepository.findByDni(dni);
     }
     public void deleteUser(Long id) {
         usersRepository.deleteById(id);
+    }
+
+    public void updateUser(User userOriginal) {
+        userOriginal.setPassword(userOriginal.getPassword());
+        usersRepository.save(userOriginal);
     }
 }
 
