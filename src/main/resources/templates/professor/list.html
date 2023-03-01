@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="fragments/head"></head>
 <body>
 <!-- Barra de Navegación superior -->
@@ -26,8 +27,8 @@
                 <td th:text="${professor.nombre}"> Nombre</td>
                 <td th:text="${professor.apellidos}"> Apellidos</td>
                 <td th:text="${professor.categoria}"> Categoria</td>
-                <td><a th:href="${'/professor/details/' + professor.dni}">detalles</a></td>
-                <td><a th:href="${'/professor/delete/' + professor.dni}">eliminar</a></td>
+                <td><a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_PROFESSOR')" th:href="${'/professor/details/' + professor.dni}">detalles</a></td>
+                <td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="${'/professor/delete/' + professor.dni}">eliminar</a></td>
             </tr>
             </tbody>
         </table>
