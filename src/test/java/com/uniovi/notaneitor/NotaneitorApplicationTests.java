@@ -170,7 +170,7 @@ class NotaneitorApplicationTests {
         //Rellenamos el formulario
         PO_LoginView.fillLoginForm(driver, "99999990A", "123");
         //Comprobamos que entramos en la pagina privada de Alumno
-        String checkText = "Notas del usuario";
+        String checkText = "Identifícate";
         List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
         Assertions.assertEquals(checkText, result.get(0).getText());
     }
@@ -182,12 +182,12 @@ class NotaneitorApplicationTests {
         PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
         //Rellenamos el formulario
         PO_LoginView.fillLoginForm(driver, "99999990A", "123456");
-        //Nos desconectamos
-        PO_HomeView.clickOption(driver, "logout", "text", "Identifícate");
         //Comprobamos que entramos en la pagina privada de Alumno
         String checkText = "Notas del usuario";
         List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
         Assertions.assertEquals(checkText, result.get(0).getText());
+        String loginText = PO_HomeView.getP().getString("signup.message", PO_Properties.getSPANISH());
+        PO_PrivateView.clickOption(driver, "logout", "text", loginText);
     }
 
     //PR12. Loguearse, comprobar que se visualizan 4 filas de notas y desconectarse usando el rol de estudiante
@@ -243,7 +243,7 @@ class NotaneitorApplicationTests {
         //Cmmprobamos que entramos en la pagina privada del Profesor
         PO_View.checkElementBy(driver, "text", "99999993D");
         //Pinchamos en la opción de menú de Notas: //li[contains(@id, 'marks-menu')]/a
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//li[contains(@id, 'marksmenu')]/a");
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//li[contains(@id, 'marks-menu')]/a");
         elements.get(0).click();
         //Esperamos a que aparezca la opción de añadir nota: //a[contains(@href, 'mark/add')]
         elements = PO_View.checkElementBy(driver, "free", "//a[contains(@href, 'mark/add')]");
@@ -274,7 +274,7 @@ class NotaneitorApplicationTests {
         //Comprobamos que entramos en la página privada del Profesor
         PO_View.checkElementBy(driver, "text", "99999993D");
         //Pinchamos en la opción de menú de Notas: //li[contains(@id, 'marks-menu')]/a
-        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//li[contains(@id, 'marksmenu')]/a");
+        List<WebElement> elements = PO_View.checkElementBy(driver, "free", "//li[contains(@id, 'marks-menu')]/a");
         elements.get(0).click();
         //Pinchamos en la opción de lista de notas.
         elements = PO_View.checkElementBy(driver, "free", "//a[contains(@href, 'mark/list')]");
@@ -285,7 +285,7 @@ class NotaneitorApplicationTests {
         elements.get(3).click();
         //Esperamos a que aparezca la Nueva nota en la última página
         //Y Pinchamos en el enlace de borrado de la Nota "Nota Nueva 1"
-        elements = PO_View.checkElementBy(driver, "free", "//td[contains(text(), 'Nota Nueva 1')]/followingsibling::*/a[contains(@href, 'mark/delete')]");
+        elements = PO_View.checkElementBy(driver, "free", "//td[contains(text(), 'Nota Nueva 1')]/following-sibling::*/a[contains(@href, 'mark/delete')]");
         elements.get(0).click();
         //Volvemos a la última página
         elements = PO_View.checkElementBy(driver, "free", "//a[contains(@class, 'page-link')]");
